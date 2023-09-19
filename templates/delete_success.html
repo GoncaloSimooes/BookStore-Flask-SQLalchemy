@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deletion Success</title>
+</head>
+<body>
+    <h1>Deletion Successful</h1>
+    <p>The following books have been deleted:</p>
+    <ul>
+        {% for book in deleted_books %}
+            <li>{{ book.title }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Back to Home</a>
+</body>
+</html>

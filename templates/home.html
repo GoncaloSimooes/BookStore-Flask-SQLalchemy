@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  </head>
+  <body>
+  <div>
+    <label for="sort_by">Sort By:</label>
+    <select id="sort_by" name="sort_by">
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+    </select>
+    <button onclick="sortBooks()">Sort</button>
+</div>
+  <div>
+    <form action="/" method="GET">
+        <label for="search_query">Search:</label>
+        <input type="text" id="search_query" name="search_query" required>
+        <button type="submit">Search</button>
+    </form>
+
+<form action="/delete-book" method="GET">
+    <input type="text" name="delete_query" placeholder="Enter book name to delete">
+    <button type="submit">Delete</button>
+</form>
+
+</div>
+    {% for book in books %}
+    <div> <h3>{{ book.title }}</h3>
+    <p>Author: {{ book.author_name }}</p>
+        {% if book.cover_image %}
+            <img src="{{ book.cover_image }}" alt="Cover Image" style="max-width: 200px;">
+        {% else %}
+            <p>No cover image available</p>
+        {% endif %}
+
+<!--        &lt;!&ndash; Add Delete Book button with a form to send a POST request &ndash;&gt;-->
+<!--        <form action="/book/{{ book.id }}/delete" method="POST">-->
+<!--            <button type="submit">Delete Book</button>-->
+<!--        </form>-->
+
+    </div>
+    {% endfor %}
+
+  <!-- Add the buttons that lead to add_author and add_book pages -->
+<div>
+    <a href="/add_author"><button>Add Author</button></a>
+    <a href="/add_book"><button>Add Book</button></a>
+</div>
+
+  <!-- Add JavaScript to handle sorting -->
+<script>
+    function sortBooks() {
+        const sortBy = document.getElementById("sort_by").value;
+        window.location.href = `/?sort_by=${sortBy}`;
+    }
+</script>
+  </body>
+</html>
